@@ -105,6 +105,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
 
     private boolean documentAnimation = false;
     private int numberOfRectangles = 15;
+    private int detectionCount = 0;
     private Boolean enableTorch = false;
     private String overlayColor = null;
     private View blinkView = null;
@@ -115,9 +116,14 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
 
     private OnScannerListener listener = null;
     private OnProcessingListener processingListener = null;
+    private OnDetectionCountListener detectionListener  = null;
 
     public interface OnScannerListener{
         void onPictureTaken(WritableMap path);
+    }
+
+    public interface OnDetectionCountListener{
+        void onDetectionCount(WritableMap path);
     }
 
     public interface OnProcessingListener{
@@ -138,6 +144,14 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
 
     public void removeOnProcessingListener(){
         this.processingListener = null;
+    }
+
+    public void setOnDetectionCountListener(OnDetectionCountListener listener){
+        this.detectionListener = listener;
+    }
+
+    public void removeOnDetectionCountListener(){
+        this.detectionListener  = null;
     }
 
     public OpenNoteCameraView(Context context, AttributeSet attrs) {
@@ -178,6 +192,11 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
             p.setFlashMode(enableTorch ? Camera.Parameters.FLASH_MODE_TORCH : Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(p);
         }
+    }
+
+    public voic setDetectionCount(int count) {
+        this.detectionCount = count
+        this.detectionListener.onDetectionCount(count);
     }
 
     public void capture(){

@@ -156,6 +156,7 @@ public class ImageProcessor extends Handler {
 
         if ( detectPreviewDocument(frame) && focused ) {
             numOfSquares ++;
+            mMainActivity.setDetectionCount(numOfSquares)
             if(numOfSquares == numOfRectangles) {
                 mMainActivity.requestPicture();
                 mMainActivity.waitSpinnerVisible();

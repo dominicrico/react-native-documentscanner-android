@@ -50,6 +50,13 @@ public class DocumentScannerViewManager extends ViewGroupManager<MainView>{
                 dispatchEvent(reactContext,"onPictureTaken", data);
             }
         });
+
+        view.setOnDetectionCountListener(new OpenNoteCameraView.OnDetectionCountListener() {
+            @Override
+            public void onDetectionCount(WritableMap data) {
+                dispatchEvent(reactContext,"onDetectionCount", data);
+            }
+        });
         
         return view;
     }
