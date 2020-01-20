@@ -156,7 +156,7 @@ public class ImageProcessor extends Handler {
 
         if ( detectPreviewDocument(frame) && focused ) {
             numOfSquares ++;
-            mMainActivity.setDetectionCount(numOfSquares)
+            mMainActivity.setDetectionCount(numOfSquares);
             if(numOfSquares == numOfRectangles) {
                 mMainActivity.requestPicture();
                 mMainActivity.waitSpinnerVisible();
@@ -184,7 +184,7 @@ public class ImageProcessor extends Handler {
         }
 
         ScannedDocument doc = detectDocument(img);
-        
+
         mMainActivity.getHUD().clear();
         mMainActivity.invalidateHUD();
         mMainActivity.saveDocument(doc);

@@ -123,7 +123,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
     }
 
     public interface OnDetectionCountListener{
-        void onDetectionCount(WritableMap path);
+        void onDetectionCount(int path);
     }
 
     public interface OnProcessingListener{
@@ -165,7 +165,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
         mSharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         pCallback = this;
         mView = frameLayout;
-        
+
         LayoutInflater lf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         initOpenCv(context);
@@ -194,8 +194,8 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
         }
     }
 
-    public voic setDetectionCount(int count) {
-        this.detectionCount = count
+    public void setDetectionCount(int count) {
+        this.detectionCount = count;
         this.detectionListener.onDetectionCount(count);
     }
 
@@ -235,7 +235,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
         mWaitSpinner = mView.findViewById(R.id.wait_spinner);
         blinkView = mView.findViewById(R.id.blink_view);
         blinkView.setBackgroundColor(Color.WHITE);
-        
+
         mVisible = true;
 
         mActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -441,7 +441,7 @@ public class OpenNoteCameraView extends JavaCameraView implements PictureCallbac
         if (pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             param.setFlashMode(enableTorch ? Camera.Parameters.FLASH_MODE_TORCH : Camera.Parameters.FLASH_MODE_OFF);
         }
-         
+
         mCamera.setParameters(param);
 //        mBugRotate = mSharedPref.getBoolean("bug_rotate", false);
 

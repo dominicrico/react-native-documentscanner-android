@@ -11,10 +11,10 @@ import {
 var iface = {
     name: 'DocumentScanner',
     propTypes: {
-      documentAnimation : PropTypes.bool,      
-      detectionCountBeforeCapture : PropTypes.number,      
+      documentAnimation : PropTypes.bool,
+      detectionCountBeforeCapture : PropTypes.number,
       enableTorch : PropTypes.bool,
-      manualOnly: PropTypes.bool,   
+      manualOnly: PropTypes.bool,
       overlayColor: PropTypes.string,
       contrast: PropTypes.number,
       brightness: PropTypes.number,
@@ -31,18 +31,21 @@ class Scanner extends PureComponent{
   static defaultProps = {
     onPictureTaken: ()=>{},
     onProcessing: ()=>{},
+    onDetectionCount: ()=>{}
   }
 
   componentWillMount(){
-    const { onPictureTaken, onProcessing } = this.props;
+    const { onPictureTaken, onProcessing, onDetectionCount } = this.props;
     DeviceEventEmitter.addListener('onPictureTaken', onPictureTaken);
     DeviceEventEmitter.addListener('onProcessingChange', onProcessing);
+    DeviceEventEmitter.addListener('onDetectionCount', onDetectionCount);
   }
-  
+
   componentWillUnmount(){
-    const { onPictureTaken, onProcessing } = this.props;
+    const { onPictureTaken, onProcessing, onDetectionCount } = this.props;
     DeviceEventEmitter.removeListener('onPictureTaken', onPictureTaken);
     DeviceEventEmitter.removeListener('onProcessingChange', onProcessing);
+    DeviceEventEmitter.removeListener('onDetectionCount', onDetectionCount);
   }
 
   capture = ()=>{
